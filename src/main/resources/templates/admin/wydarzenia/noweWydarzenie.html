@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeLeaf.org"
+      lang="pl">
+
+<head>
+    <title>Filharmonix</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="website description"/>
+    <meta name="keywords" content="website keywords, website keywords"/>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+<div id="main">
+    <div id="header">
+        <div id="logo">
+            <div id="logo_text">
+                <h1><a href="/admin/wydarzenia">Filhar<span class="logo_colour">monix</span></a></h1>
+                <h2>Bardzo. Chwytliwy. Slogan</h2>
+            </div>
+        </div>
+        <div id="menubar">
+
+            <ul id="menu">
+                <li style="text-align: left"><strong>Jesteś zalogowany jako: <span
+                        th:text="${#authentication.getPrincipal().getUsername()}"></span></strong></li>
+                <li class="selected"><a href="/admin/wydarzenia">Wydarzenia</a></li>
+                <li><a href="/admin/rodzaje">Rodzaje</a></li>
+                <li><a href="/admin/sale">Sale</a></li>
+                <li><a href="#" th:href="@{/logout}">Wyloguj się</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="content_header"></div>
+    <div id="site_content">
+        <div id="banner"></div>
+        <div id="sidebar_container">
+            <div class="sidebar">
+                <div class="sidebar_top"></div>
+                <div class="sidebar_item">
+                    <h3>Nadchodzące wydarzenie:</h3>
+                    <h4 th:text="${nextWydarzenie.getNazwa_wydarzenia()}"></h4>
+                    <h5 th:text="${#temporals.format(nextWydarzenie.getCzas_rozpoczecia(), 'dd-MM-yyyy HH:mm')}"></h5>
+                    <p th:text="${nextWydarzenie.getOpis()}"><br/>
+                </div>
+                <div class="sidebar_base"></div>
+            </div>
+            <div class="sidebar">
+                <div class="sidebar_top"></div>
+                <div class="sidebar_item">
+                    <h3>Dane adresowe:</h3>
+                    <ul>
+                        <li th:text="${filharmonia.getNazwa_filharmonii()}"></li>
+                        <li th:text="${filharmonia.getAdres().getMiasto()}"></li>
+                        <li th:text="'Ulica '+${filharmonia.getAdres().getUlica()}+' '+${filharmonia.getAdres().getNr_budynku()}"></li>
+                        <li th:text="${filharmonia.getAdres().getKod_pocztowy}"></li>
+                    </ul>
+                </div>
+                <div class="sidebar_base"></div>
+            </div>
+        </div>
+        <div id="content" style="text-align: center">
+            <h1>Nowe Wydarzenie</h1>
+            <br/>
+            <form action="#" th:action="@{/admin/noweWydarzenie/save}" th:object="${wydarzenie}" method="post">
+                <div class="form_settings">
+                    <p><span>Nazwa</span><input type="text" th:field="*{nazwa_wydarzenia}" required="required"></td></p>
+                    <p><span>Czas rozpoczecia</span><input type="datetime-local" th:field="*{czas_rozpoczecia_str}"
+                                                           required="required"></p>
+                    <p><span>Opis</span><textarea rows="8" cols="50" th:field="*{opis}" required="required"></textarea>
+                    </p>
+                    <p><span>Sala</span><select th:field="*{id_sali}">
+                        <option th:each="sala : ${sale}" th:value="${sala.getId_sali()}"
+                                th:text="${sala.getOzn_sali()}"></option>
+                    </select></p>
+                    <p><span>Rodzaj</span><select th:field="*{id_rodzaju}">
+                        <option th:each="rodzaj : ${rodzaje}" th:value="${rodzaj.getId_rodzaju()}"
+                                th:text="${rodzaj.getNazwa_rodzaju()}"></option>
+                    </select></p>
+                    <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="name"
+                                                                           value="Dodaj"/></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+        <p><a href="/admin/wydarzenia">Wydarzenia</a> | <a href="/admin/rodzaje">Rodzaje</a> | <a href="/admin/sale">Sale</a>
+            | <a href="#" th:href="@{/logout}">Wyloguj się</a></p>
+        <p> Projekt BADA 2021/2022 | <a>Szymon Kasperek</a> | <a> Marcin Latawiec </a> | <a>Filharmonix</a></p>
+    </div>
+</div>
+</body>
+</html>

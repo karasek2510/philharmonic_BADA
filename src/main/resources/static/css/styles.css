@@ -1,0 +1,132 @@
+* {padding:0;margin:0;}
+
+html {width:100%;height:100%;}
+
+body {font-family:Arial, Helvetica, Sans-serif;font-size:14px;line-height:1.5;font-weight:400;color:#434343;background:#FFF;}
+
+.container {width:1920px;margin:0 auto;}
+
+header {margin:25px 0;}
+header img {width:100%;}
+
+#reset {clear:both}
+
+
+aside {float:left;width:30%;margin:0 0 25px;}
+
+
+.navbar ul {
+    float: left;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.navbar li {
+    float: left;
+}
+.navbar li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navbar li a:hover{
+    background: #111;
+}
+
+.tablepattern {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tablepattern td, #tablepattern th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+
+.tablepattern tr:hover {
+    background-color: #04AA6D;
+}
+
+.tablepattern th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.photo {
+    width: 100%;
+    margin: 0 0 0px;
+}
+
+.main {
+    float: right;
+    width: 100%;
+    margin: 0 0 25px;
+}
+#emptyspacediv {
+    margin: 200px;
+    background: white;
+}
+#error {
+    width: 75%;
+    text-align: center;
+    border-color: black;
+    background: #ff0000;
+    margin: auto;
+    padding: 0;
+    color: rgba(255, 255, 255);
+    font-size: 3.6em;
+    font-weight: 600;
+    size: 500px;
+    box-shadow: inset 0 0 35px 0px rgba(0, 0, 0, 0.25),
+    inset 0 2px 1px 1px rgba(255, 255, 255, 0),
+    1px 1px 15px 2px rgba(120, 120, 120, 1);
+
+    text-shadow: 1px -1px 3px rgba(120, 120, 120, 1),
+    -1px 1px 3px rgba(120, 120, 120, 1);
+    outline: none;
+    -webkit-transition: box-shadow 0.4s, text-shadow 0.5s;
+    -moz-transition: box-shadow 0.4s, text-shadow 0.5s;
+    transition: box-shadow 0.4s, text-shadow 0.5s;
+}
+.footer {
+    clear: both;
+    color: #FFF;
+    background: #333;
+    padding: 15px 0 15px 30px;
+}
+
+@media (min-width: 1100px) {
+    .container {width:1920px;}
+    aside {width:30%;}
+    #main {width:65%;}
+}
+@media (max-width: 1100px) and (min-width: 1000px) {
+    .container {width:950px;}
+    aside {width:30%;}
+    #main {width:65%;}
+}
+@media (max-width: 1000px) and (min-width: 800px) {
+    .container {width:750px;}
+    aside {width:30%;}
+    #main {width:65%;}
+}
+@media (max-width: 800px) and (min-width: 500px) {
+    .container {width:450px;}
+    aside,
+    #main {width:100%;}
+}
+@media (max-width: 500px) {
+    .container {width:90%;}
+    aside,
+    #main {width:100%;}
+}

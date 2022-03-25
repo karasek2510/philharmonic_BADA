@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeLeaf.org"
+      lang="pl">
+
+<head>
+    <title>Filharmonix</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="website description"/>
+    <meta name="keywords" content="website keywords, website keywords"/>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+<div id="main">
+    <div id="header">
+        <div id="logo">
+            <div id="logo_text">
+                <h1><a href="/">Filhar<span class="logo_colour">monix</span></a></h1>
+                <h2>Bardzo. Chwytliwy. Slogan</h2>
+            </div>
+        </div>
+        <div id="menubar">
+            <ul id="menu">
+                <li><a href="/">O nas</a></li>
+                <li class="selected"><a href="/wydarzenia">Wydarzenia</a></li>
+                <li><a href="/login">Logowanie</a></li>
+                <li><a href="/register">Rejestracja</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="content_header"></div>
+    <div id="site_content">
+        <div id="banner"></div>
+        <div id="sidebar_container">
+            <div class="sidebar">
+                <div class="sidebar_top"></div>
+                <div class="sidebar_item">
+                    <h3>Nadchodzące wydarzenie:</h3>
+                    <h4 th:text="${nextWydarzenie.getNazwa_wydarzenia()}"></h4>
+                    <h5 th:text="${#temporals.format(nextWydarzenie.getCzas_rozpoczecia(), 'dd-MM-yyyy HH:mm')}"></h5>
+                    <p th:text="${nextWydarzenie.getOpis()}"><br/>
+                </div>
+                <div class="sidebar_base"></div>
+            </div>
+            <div class="sidebar">
+                <div class="sidebar_top"></div>
+                <div class="sidebar_item">
+                    <h3>Dane adresowe:</h3>
+                    <ul>
+                        <li th:text="${filharmonia.getNazwa_filharmonii()}"></li>
+                        <li th:text="${filharmonia.getAdres().getMiasto()}"></li>
+                        <li th:text="'Ulica '+${filharmonia.getAdres().getUlica()}+' '+${filharmonia.getAdres().getNr_budynku()}"></li>
+                        <li th:text="${filharmonia.getAdres().getKod_pocztowy}"></li>
+                    </ul>
+                </div>
+                <div class="sidebar_base"></div>
+            </div>
+        </div>
+        <div id="content">
+            <div th:if="${listaWydarzen.size()}">
+                <h1 style="text-align: center">Wydarzenia</h1>
+                <table class="tablepattern">
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Czas rozpoczecia</th>
+                        <th>Rodzaj</th>
+                        <th>Sala</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="wydarzenie : ${listaWydarzen}">
+                        <td th:text="${wydarzenie.getNazwa_wydarzenia()}">Nazwa</td>
+
+                        <td th:text="${#temporals.format(wydarzenie.getCzas_rozpoczecia(), 'dd-MM-yyyy HH:mm')}">Czas
+                            rozpoczęcia
+                        </td>
+                        <td th:text="${wydarzenie?.getRodzaj_wydarzenia()?.getNazwa_rodzaju()} ?: 'Brak'">Rodzaj</td>
+                        <td th:text="${wydarzenie?.getSala?.getOzn_sali()} ?: 'Brak'">Sala</td>
+                        <td>
+                            <a th:href="@{'/wydarzenia/'+${wydarzenie.getId_wydarzenia()}}">Zobacz szczegóły</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="${listaWydarzen.size()}">
+                <h1 style="text-align: center">Brak wydarzeń</h1>
+            </div>
+        </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+        <p><a href="/">O nas</a> | <a href="/wydarzenia">Wydarzenia</a> | <a href="/login">Logowanie</a> | <a
+                href="/register">Rejestracja</a></p>
+        <p> Projekt BADA 2021/2022 | <a>Szymon Kasperek</a> | <a> Marcin Latawiec </a> | <a>Filharmonix</a></p>
+    </div>
+</div>
+</body>
+</html>
+
